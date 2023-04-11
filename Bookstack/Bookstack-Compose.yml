@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  bookstack:
+    image: lscr.io/linuxserver/bookstack:latest
+    container_name: bookstack
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Tbilisi
+      - APP_URL=https://kb.zarnosky.online
+      - DB_HOST=mariadb
+      - DB_PORT=3306
+      - DB_USER=nexus
+      - DB_PASS=${DbPassword}
+      - DB_DATABASE=nexusDB
+    volumes:
+      - /opt/local/docker/config/bookstack:/config
+    ports:
+      - 6875:80
+    networks:
+      - proxy-nexus
+    restart: unless-stopped
+
+networks:
+  nexus-proxy:
+    driver: bridge
+    external: true

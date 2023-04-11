@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  whoogle-search:
+    image: benbusby/whoogle-search:latest
+    container_name: whoogle-search
+    environment: 
+      - WHOOGLE_CONFIG_THEME=dark
+      - WHOOGLE_CONFIG_DISABLE=1
+      - WHOOGLE_CONFIG_URL=https://search.zarnosky.com/
+    ports:
+      - 5000:5000
+    networks:
+      - proxy-nexus
+    restart: unless-stopped
+
+networks:
+  nexus-proxy:
+    driver: bridge
+    external: true

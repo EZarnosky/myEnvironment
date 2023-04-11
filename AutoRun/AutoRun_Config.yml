@@ -1,0 +1,51 @@
+##############################################################
+## This is just a basic config file to get the app to start ##
+##############################################################
+ 
+minimum-age: 5ms
+scan-delay: 15s
+scan-stats: 30m
+ 
+authentication:
+  username: admin       #Change
+  password: MyPassword  #Change
+ 
+anchors:
+  - /home/user/mounts/rclone/_Mounted-GDrive
+ 
+port: 3030
+ 
+triggers:
+  manual:
+    priority: 0
+ 
+  sonarr:
+    - name: sonarr
+      priority: 2
+
+  radarr:
+    - name: radarr
+      priority: 2
+
+ 
+  inotify:
+    - priority: 1
+ 
+      include:
+        - ^/media
+ 
+      paths:
+      - path: '/home/user/mounts/rclone/Movies/3D'
+      - path: '/home/user/mounts/rclone/Movies/4k'
+      - path: '/home/user/mounts/rclone/Movies/720p-1080p'
+      - path: '/home/user/mounts/rclone/Movies/Fanedit'
+      - path: '/home/user/mounts/rclone/Movies/Mainstream'
+      - path: '/home/user/mounts/rclone/TV'
+      - path: '/home/user/mounts/rclone/TV Series'
+      - path: '/home/user/mounts/rclone/Music'
+      - path: '/home/user/mounts/rclone/Training'
+ 
+targets:
+  plex:
+    - url: http://ericflix-plex.cloud.seedboxes.cc:32400
+      token: HRatM3yATvaV1CNHbp-B

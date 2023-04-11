@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_HTML=${LOG_HTML:-false}
+      - CAPTCHA_SOLVER=${CAPTCHA_SOLVER:-none}
+      - TZ=Asia/Tbilisi
+    ports:
+      - "8191:8191"
+    networks:
+      - proxy-nexus
+    restart: unless-stopped
+    
+networks:
+  nexus-proxy:
+    driver: bridge
+    external: true

@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  mariadb:
+    image: lscr.io/linuxserver/mariadb:latest
+    container_name: mariadb
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Tbilisi
+      - MYSQL_ROOT_PASSWORD=${DbPassword}
+      - MYSQL_DATABASE=nexusDB
+      - MYSQL_USER=nexus
+      - MYSQL_PASSWORD=${DbPassword}
+    volumes:
+      - /opt/local/docker/config/mariadb:/config
+    ports:
+      - 3306:3306
+    networks:
+      - proxy-nexus
+    restart: unless-stopped
+
+networks:
+  nexus-proxy:
+    driver: bridge
+    external: true

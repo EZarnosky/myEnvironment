@@ -1,0 +1,27 @@
+version: "2"
+services:
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+      environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Tbilisi
+    volumes:
+      - /opt/local/docker/config/adguardhome/work:/opt/adguardhome/work
+      - /opt/local/docker/config/adguardhome/conf:/opt/adguardhome/conf
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 784:784/udp
+      - 853:853/tcp
+      - 3000:3000/tcp
+      - 83:80/tcp
+    networks:
+     - proxy-nexus
+    restart: unless-stopped
+
+networks:
+  nexus-proxy:
+    driver: bridge
+    external: true

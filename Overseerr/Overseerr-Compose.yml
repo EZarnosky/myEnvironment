@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  overseerr:
+    image: lscr.io/linuxserver/overseerr:latest
+    container_name: overseerr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Tbilisi
+    volumes:
+      - /opt/local/docker/config/overseerr:/config
+    ports:
+      - 5055:5055
+    networks:
+      - proxy-nexus
+    restart: unless-stopped
+
+networks:
+  nexus-proxy:
+    driver: bridge
+    external: true
+
+#https://docs.overseerr.dev/extending-overseerr/reverse-proxyhttps://docs.overseerr.dev/extending-overseerr/reverse-proxy
